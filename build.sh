@@ -12,6 +12,8 @@ git submodule update
 set -e 
 cd `dirname $0`
 
+export FORCE_UNSAFE_CONFIGURE=1
+
 if [ ! -e buildroot/.config ]
 then
 	echo "MISSING BUILDROOT CONFIGURATION FILE"
