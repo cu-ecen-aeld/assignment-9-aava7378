@@ -1,0 +1,27 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        modprobe aesdchar || insmod /lib/modules/$(uname -r)/extra/aesdchar.ko
+
+        major="$(awk '$2=="aesdchar" {print $1}' /proc/devices)"
+        if [ -n "$major" ]; then
+            rm -f /dev/aesdchar
+            mknod /dev/aesdchar c "$major" 0
+        fi
+        ;;
+    stop)
+        rm -f /dev/aesdchar
+        rmmod aesdchar
+        ;;
+    restart)
+        "$0" stop
+        "$0" start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0

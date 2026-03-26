@@ -1,0 +1,4 @@
+menu "AAVA7378 packages"
+	source "$BR2_EXTERNAL_AAVA7378_PATH/package/aesd-char-driver/Config.in"
+	source "$BR2_EXTERNAL_AAVA7378_PATH/package/aesd-assignments/Config.in"
+endmenu
